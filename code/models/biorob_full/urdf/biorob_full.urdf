@@ -1,0 +1,752 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<robot name="biorob_full">
+
+  <material name="color1">
+    <color rgba="0.752941176470588 0.752941176470588 0.752941176470588 1"/>
+  </material>
+
+  <material name="color2">
+    <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1"/>
+  </material>
+
+  <!--  ********************  Base  ********************  -->
+
+  <link name="base">
+    <inertial>
+      <origin xyz="0.000164217868208458 -0.000131914611541264 0.000894182474388494" rpy="0 0 0"/>
+      <mass value="0.721791502953507"/>
+      <inertia ixx="0.000430307515066524" ixy="-5.99598548887226E-07" ixz="2.96214858848486E-07"
+        iyy="0.00223914048674885" iyz="1.49510279671567E-07" izz="0.00249978128182879"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/base.STL"/>
+      </geometry>
+      <material name="color1"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/base.STL"/>
+      </geometry>
+    </collision>
+    <contact>
+      <lateral_friction value="1.0"/>
+      <restitution value="0.5"/>
+    </contact>
+  </link>
+
+  <!--  ********************  Front Left Leg  ********************  -->
+
+  <joint name="fl_hip" type="revolute">
+    <origin xyz="0.190000000000001 0.1046 0" rpy="-1.5707963267949 0 0"/>
+    <parent link="base"/>
+    <child link="fl_thigh"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="2.7" lower="-3.141593" upper="3.141593" velocity="1.0"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+
+  <link name="fl_thigh">
+    <inertial>
+      <origin xyz="0.0588204034135449 0.0587656622890264 0.0206910280673168" rpy="0 0 0"/>
+      <mass value="0.0446567870646305"/>
+      <inertia ixx="8.02583132631178E-05" ixy="-6.94762171825784E-05" ixz="-7.12139074156068E-06"
+        iyy="8.01115475493533E-05" iyz="-7.13010947467628E-06" izz="0.000152702379584202"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/FL_thigh.STL"/>
+      </geometry>
+      <material name="color1"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/FL_thigh.STL"/>
+      </geometry>
+    </collision>
+    <contact>
+      <lateral_friction value="1.0"/>
+      <restitution value="0.5"/>
+    </contact>
+  </link>
+
+  <joint name="fl_thigh_rod" type="revolute">
+    <origin xyz="0.0679529616720271 0.0679529616720273 0.035" rpy="0 0 0.785398163397457"/>
+    <parent link="fl_thigh"/>
+    <child link="fl_rod"/>
+    <axis xyz="0 0 1" />
+    <limit effort="2.7" lower="-3.141593" upper="3.141593" velocity="1.0"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+
+  <link name="fl_rod">
+    <inertial>
+      <origin xyz="-1.38777878078145E-16 0.0715000000000011 0.001" rpy="0 0 0"/>
+      <mass value="0.00360792918860103"/>
+      <inertia ixx="6.83336412404555E-06" ixy="-1.64608941898053E-20" ixz="-7.80392944048245E-23"
+        iyy="4.43721296199338E-08" iyz="-3.76872717888276E-21" izz="6.87533096753975E-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/FL_rod.STL"/>
+      </geometry>
+      <material name="color1"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/FL_rod.STL"/>
+      </geometry>
+    </collision>
+    <contact>
+      <lateral_friction value="1.0"/>
+      <restitution value="0.5"/>
+    </contact>
+  </link>
+
+  <joint name="fl_knee" type="revolute">
+    <origin xyz="0.113137084989847 0.113137084989848 0.037" rpy="0 0 0.785398163397447"/>
+    <parent link="fl_thigh"/>
+    <child link="fl_calf"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="2.7" lower="-1.0" upper="1.0" velocity="1.0"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+
+  <link name="fl_calf">
+    <inertial>
+      <origin xyz="-7.19118556560816E-06 0.0764223764767616 0.0194052082794629" rpy="0 0 0"/>
+      <mass value="0.0310372891847717"/>
+      <inertia ixx="8.82279269861022E-05" ixy="-1.06897707839655E-08" ixz="-2.94947480260767E-10"
+        iyy="7.33610452948303E-06" iyz="-4.70167252102552E-06" izz="8.94776449037965E-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/FL_calf.STL"/>
+      </geometry>
+      <material name="color1"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/FL_calf.STL"/>
+      </geometry>
+    </collision>
+    <contact>
+      <lateral_friction value="1.0"/>
+      <restitution value="0.5"/>
+    </contact>
+  </link>
+
+  <joint name="fl_ankle" type="revolute">
+    <origin xyz="0 0.143000000000001 0.00699999999997969" rpy="-3.14159265358979 0 1.57079632679495"/>
+    <parent link="fl_calf"/>
+    <child link="fl_foot"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="2.7" lower="-3.141593" upper="3.141593" velocity="1.0"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+
+  <link name="fl_foot">
+    <inertial>
+      <origin xyz="1.54961082521332E-07 0.0268910372508629 0.0181355154086111" rpy="0 0 0"/>
+      <mass value="0.0364619323149185"/>
+      <inertia ixx="0.000144246956105006" ixy="1.75311259239863E-10" ixz="5.26684284107647E-11"
+        iyy="8.19921501222759E-06" iyz="8.90329684338227E-07" izz="0.000147087837197395"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/FL_foot.STL"/>
+      </geometry>
+      <material name="color1"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/FL_foot.STL"/>
+      </geometry>
+    </collision>
+    <contact>
+      <lateral_friction value="1.0"/>
+      <restitution value="0.5"/>
+    </contact>
+  </link>
+
+  <joint name="fl_foot_toe" type="revolute">
+    <origin xyz="0 0.115 0" rpy="-3.14159265358979 0 1.57079632679495"/>
+    <parent link="fl_foot"/>
+    <child link="fl_toe"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="2.7" lower="-1.0" upper="2.5" velocity="1.0"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+
+  <link name="fl_toe">
+    <inertial>
+      <origin xyz="0.0138123620121706 -0.013812362012168 0.0126407688122038" rpy="0 0 0"/>
+      <mass value="0.0120009876791377"/>
+      <inertia ixx="4.37842860521296E-06" ixy="2.06038737805983E-06" ixz="-5.95468752400181E-08"
+        iyy="4.37842860521291E-06" iyz="5.95468752400223E-08" izz="7.32023047052957E-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/FL_toe.STL"/>
+      </geometry>
+      <material name="color1"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/FL_toe.STL" />
+      </geometry>
+    </collision>
+    <contact>
+      <lateral_friction value="1.0"/>
+      <restitution value="0.5"/>
+    </contact>
+  </link>
+
+  <!--  ********************  Front Rgith Leg  ********************  -->
+
+  <joint name="fr_hip" type="revolute">
+    <origin xyz="0.19 -0.1046 0" rpy="1.5707963267949 1.5707963267949 0" />
+    <parent link="base"/>
+    <child link="fr_thigh"/>
+    <axis xyz="0 0 -1"/>
+    <limit effort="2.7" lower="-3.141593" upper="3.141593" velocity="1.0"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+
+  <link name="fr_thigh">
+    <inertial>
+      <origin xyz="0.0588180289851674 0.0587632789237116 0.0206905601387532" rpy="0 0 0"/>
+      <mass value="0.0446587924652194"/>
+      <inertia ixx="8.0266357713901E-05" ixy="-6.94816224299281E-05" ixz="-7.12242232447736E-06"
+        iyy="8.01194124266154E-05" iyz="-7.13115625652234E-06" izz="0.000152713230314413"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/FR_thigh.STL"/>
+      </geometry>
+      <material name="color1"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/FR_thigh.STL"/>
+      </geometry>
+    </collision>
+    <contact>
+      <lateral_friction value="1.0"/>
+      <restitution value="0.5"/>
+    </contact>
+  </link>
+
+  <joint name="fr_thigh_rod" type="revolute">
+    <origin xyz="0.0679529616719479 0.0679529616721066 0.035" rpy="0 0 -2.35619449019118"/>
+    <parent link="fr_thigh"/>
+    <child link="fr_rod"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="2.7" lower="-3.141593" upper="3.141593" velocity="1.0"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+
+  <link name="fr_rod">
+    <inertial>
+      <origin xyz="3.60822483003176E-16 0.0714999999999999 0.000999999999999918" rpy="0 0 0"/>
+      <mass value="0.00360792918860103"/>
+      <inertia ixx="6.83336412404555E-06" ixy="1.49057946382056E-20" ixz="-1.85538647735954E-23"
+        iyy="4.43721296199368E-08" iyz="2.70002070538374E-21" izz="6.87533096753976E-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/FR_rod.STL"/>
+      </geometry>
+      <material name="color1"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/FR_rod.STL"/>
+      </geometry>
+    </collision>
+    <contact>
+      <lateral_friction value="1.0"/>
+      <restitution value="0.5"/>
+    </contact>
+  </link>
+
+  <joint name="fr_knee" type="revolute">
+    <origin xyz="0.113137084989716 0.11313708498998 0.0370000000000001" rpy="0 0 -2.35619449019118"/>
+    <parent link="fr_thigh"/>
+    <child link="fr_calf"/>
+    <axis xyz="0 0 -1"/>
+    <limit effort="2.7" lower="-1.0" upper="1.0" velocity="1.0"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+
+  <link name="fr_calf">
+    <inertial>
+      <origin xyz="-7.18946439035029E-06 0.076422384113419 0.0194052095441947" rpy="0 0 0"/>
+      <mass value="0.0310372840556894"/>
+      <inertia ixx="8.82279271332038E-05" ixy="-1.06899638787817E-08" ixz="-2.94997105644819E-10"
+        iyy="7.3361045430907E-06" iyz="-4.70167245278695E-06" izz="8.94776450887994E-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/BR_calf.STL"/>
+      </geometry>
+      <material name="color1"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/BR_calf.STL" />
+      </geometry>
+    </collision>
+    <contact>
+      <lateral_friction value="1.0"/>
+      <restitution value="0.5"/>
+    </contact>
+  </link>
+
+  <joint name="fr_ankle" type="revolute">
+    <origin xyz="0 0.143000000000014 0.00699999999999976" rpy="-3.14159265358979 0 -1.5707963267949"/>
+    <parent link="fr_calf"/>
+    <child link="fr_foot"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="2.7" lower="-3.141593" upper="3.141593" velocity="1.0"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+
+  <link name="fr_foot">
+    <inertial>
+      <origin xyz="-3.20179165402834E-08 0.0268910497940582 0.0181355226280183" rpy="0 0 0"/>
+      <mass value="0.0364619478545263"/>
+      <inertia ixx="0.000144246782740902" ixy="-2.60422333117755E-10" ixz="5.49051950766852E-11"
+        iyy="8.19924699121505E-06" iyz="8.90334903467464E-07" izz="0.000147087695585906"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/FR_foot.STL"/>
+      </geometry>
+      <material name="color1"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/FR_foot.STL"/>
+      </geometry>
+    </collision>
+    <contact>
+      <lateral_friction value="1.0"/>
+      <restitution value="0.5"/>
+    </contact>
+  </link>
+
+  <joint name="fr_foot_toe" type="revolute">
+    <origin xyz="0 0.115000000000002 0" rpy="3.14159265358979 0 0"/>
+    <parent link="fr_foot"/>
+    <child link="fr_toe"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="2.7" lower="-3.5" upper="1.0" velocity="1.0"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+
+  <link name="fr_toe">
+    <inertial>
+      <origin xyz="0.0138123620121705 -0.0138123620121711 0.0126407688122034" rpy="0 0 0"/>
+      <mass value="0.0120009876791377"/>
+      <inertia ixx="4.37842860521299E-06" ixy="2.06038737805982E-06" ixz="-5.95468752400197E-08"
+        iyy="4.37842860521285E-06" iyz="5.95468752400214E-08" izz="7.32023047052955E-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/FR_toe.STL"/>
+      </geometry>
+      <material name="color1"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/FR_toe.STL"/>
+      </geometry>
+    </collision>
+    <contact>
+      <lateral_friction value="1.0"/>
+      <restitution value="0.5"/>
+    </contact>
+  </link>
+
+  <!--  ********************  Back Left Leg  ********************  -->
+
+  <joint name="bl_hip" type="revolute">
+    <origin xyz="-0.19 0.1046 0" rpy="-1.5707963267949 0 0"/>
+    <parent link="base"/>
+    <child link="bl_thigh"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="2.7" lower="-3.141593" upper="3.141593" velocity="1.0"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+
+  <link name="bl_thigh">
+    <inertial>
+      <origin xyz="0.058819103545812 0.0587643437851794 0.0206907518834456" rpy="0 0 0"/>
+      <mass value="0.0446578917887883"/>
+      <inertia ixx="8.02618271752379E-05" ixy="-6.94795262190554E-05" ixz="-7.12206437205875E-06"
+        iyy="8.01149871285383E-05" iyz="-7.13078434475851E-06" izz="0.000152709049725032"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/BL_thigh.STL"/>
+      </geometry>
+      <material name="color1"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/BL_thigh.STL"/>
+      </geometry>
+    </collision>
+    <contact>
+      <lateral_friction value="1.0"/>
+      <restitution value="0.5"/>
+    </contact>
+  </link>
+
+  <joint
+    name="bl_thigh_rod" type="revolute">
+    <origin xyz="0.0679529616720408 0.0679529616720149 0.0349999999999802" rpy="0 0 0.785398163397457"/>
+    <parent link="bl_thigh"/>
+    <child link="bl_rod"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="2.7" lower="-3.141593" upper="3.141593" velocity="1.0"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+
+  <link name="bl_rod">
+    <inertial>
+      <origin xyz="-7.21644966006352E-16 0.0715000000000183 0.00100000000001987" rpy="0 0 0"/>
+      <mass value="0.00360792918860104"/>
+      <inertia ixx="6.83336412404556E-06" ixy="-1.77562590290633E-20" ixz="-7.64424842791689E-23"
+        iyy="4.43721296199359E-08" iyz="-3.76006171521923E-21" izz="6.87533096753976E-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh
+          filename="package://meshes/BL_rod.STL"/>
+      </geometry>
+      <material name="color1"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/BL_rod.STL"/>
+      </geometry>
+    </collision>
+    <contact>
+      <lateral_friction value="1.0"/>
+      <restitution value="0.5"/>
+    </contact>
+  </link>
+
+  <joint name="bl_knee" type="revolute">
+    <origin xyz="0.113137084989861 0.113137084989835 0.0369999999999802" rpy="0 0 0.785398163397447"/>
+    <parent link="bl_thigh"/>
+    <child link="bl_calf"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="2.7" lower="-1.0" upper="1.0" velocity="1.0"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+
+  <link name="bl_calf">
+    <inertial>
+      <origin xyz="-7.19106882296483E-06 0.0764223784612652 0.0194052085652547" rpy="0 0 0"/>
+      <mass value="0.0310372876291522"/>
+      <inertia ixx="8.8227925304885E-05" ixy="-1.06899028036161E-08" ixz="-2.94978888074315E-10"
+        iyy="7.3361043952141E-06" iyz="-4.70167225545831E-06" izz="8.94776431592286E-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/BL_calf.STL"/>
+      </geometry>
+      <material name="color1"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/BL_calf.STL"/>
+      </geometry>
+    </collision>
+    <contact>
+      <lateral_friction value="1.0"/>
+      <restitution value="0.5"/>
+    </contact>
+  </link>
+
+  <joint name="bl_ankle" type="revolute">
+    <origin xyz="0 0.143000000000001 0.00699999999997966" rpy="-3.14159265358979 0 1.57079632679495"/>
+    <parent link="bl_calf"/>
+    <child link="bl_foot"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="2.7" lower="-3.141593" upper="3.141593" velocity="1.0"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+
+  <link name="bl_foot">
+    <inertial>
+      <origin xyz="1.54961101020423E-07 0.026891037250862 0.0181355154085913" rpy="0 0 0"/>
+      <mass value="0.0364619323149185"/>
+      <inertia ixx="0.000144246956105006" ixy="1.75311259230122E-10" ixz="5.26684284132528E-11"
+        iyy="8.19921501222768E-06" iyz="8.9032968433821E-07" izz="0.000147087837197395"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/BL_foot.STL"/>
+      </geometry>
+      <material name="color1"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/BL_foot.STL"/>
+      </geometry>
+    </collision>
+    <contact>
+      <lateral_friction value="1.0"/>
+      <restitution value="0.5"/>
+    </contact>
+  </link>
+
+  <joint name="bl_foot_toe" type="revolute">
+    <origin xyz="0 0.115 0" rpy="-3.14159265358979 0 1.57079632679495"/>
+    <parent link="bl_foot"/>
+    <child link="bl_toe"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="2.7" lower="-1" upper="3.5" velocity="1.0"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+
+  <link name="bl_toe">
+    <inertial>
+      <origin xyz="0.01381236201217 -0.0138123620121525 0.0126407688122236" rpy="0 0 0"/>
+      <mass value="0.0120009876791377"/>
+      <inertia ixx="4.37842860521296E-06" ixy="2.06038737805982E-06" ixz="-5.95468752400187E-08"
+        iyy="4.3784286052129E-06" iyz="5.95468752400226E-08" izz="7.32023047052956E-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/BL_toe.STL"/>
+      </geometry>
+      <material name="color1"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/BL_toe.STL"/>
+      </geometry>
+    </collision>
+    <contact>
+      <lateral_friction value="1.0"/>
+      <restitution value="0.5"/>
+    </contact>
+  </link>
+
+  <!--  ********************  Back Right Leg  ********************  -->
+
+  <joint name="br_hip" type="revolute">
+    <origin xyz="-0.19 -0.1046 0" rpy="1.5707963267949 1.5707963267949 0"/>
+    <parent link="base"/>
+    <child link="br_thigh"/>
+    <axis xyz="0 0 -1"/>
+    <limit effort="2.7" lower="-3.141593" upper="3.141593" velocity="1.0"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+
+  <link name="br_thigh">
+    <inertial>
+      <origin xyz="0.0588193160400463 0.0587645136497275 0.0206908170537362" rpy="0 0 0"/>
+      <mass value="0.0446577676938896"/>
+      <inertia ixx="8.02635788823463E-05" ixy="-6.94789040202347E-05" ixz="-7.12187541555831E-06"
+        iyy="8.01165041315074E-05" iyz="-7.13062481794168E-06" izz="0.000152707806354131"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/BR_thigh.STL"/>
+      </geometry>
+      <material name="color1"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/BR_thigh.STL"/>
+      </geometry>
+    </collision>
+    <contact>
+      <lateral_friction value="1.0"/>
+      <restitution value="0.5"/>
+    </contact>
+  </link>
+
+  <joint name="br_thigh_rod" type="revolute">
+    <origin xyz="0.0679529616719216 0.067952961672196 0.035" rpy="0 0 -2.35619449018986"/>
+    <parent link="br_thigh"/>
+    <child link="br_rod"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="2.7" lower="-3.141593" upper="3.141593" velocity="1.0"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+
+  <link name="br_rod">
+    <inertial>
+      <origin xyz="4.01900734914307E-14 0.0714999999999939 0.000999999999999918" rpy="0 0 0"/>
+      <mass value="0.00360792918860104"/>
+      <inertia ixx="6.83336412404556E-06" ixy="1.59827837957496E-20" ixz="-1.99156839060582E-23"
+        iyy="4.43721296199365E-08" iyz="2.34003044658788E-21" izz="6.87533096753976E-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/BR_rod.STL"/>
+      </geometry>
+      <material name="color1"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/BR_rod.STL"/>
+      </geometry>
+    </collision>
+    <contact>
+      <lateral_friction value="1.0"/>
+      <restitution value="0.5"/>
+    </contact>
+  </link>
+
+  <joint name="br_knee" type="revolute">
+    <origin xyz="0.11313708498963 0.113137084990129 0.0370000000000001" rpy="0 0 -2.35619449018986"/>
+    <parent link="br_thigh"/>
+    <child link="br_calf"/>
+    <axis xyz="0 0 -1"/>
+    <limit effort="2.7" lower="-1.0" upper="1.0" velocity="1.0"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+
+  <link
+    name="br_calf">
+    <inertial>
+      <origin xyz="-7.19145030336765E-06 0.0764223757347629 0.0194052082672418" rpy="0 0 0"/>
+      <mass value="0.0310372897580269"/>
+      <inertia ixx="8.82279279577334E-05" ixy="-1.06901134848747E-08" ixz="-2.9500433337064E-10"
+        iyy="7.33610465887242E-06" iyz="-4.70167252963331E-06" izz="8.94776460155866E-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/BR_calf.STL"/>
+      </geometry>
+      <material name="color1"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/BR_calf.STL"/>
+      </geometry>
+    </collision>
+    <contact>
+      <lateral_friction value="1.0"/>
+      <restitution value="0.5"/>
+    </contact>
+  </link>
+
+  <joint name="br_ankle" type="revolute">
+    <origin xyz="0 0.143000000000031 0.0069999999999999" rpy="-3.14159265358979 0 -1.57079632679494"/>
+    <parent link="br_calf"/>
+    <child link="br_foot"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="2.7" lower="-3.141593" upper="3.141593" velocity="1.0"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+
+  <link name="br_foot">
+    <inertial>
+      <origin xyz="8.3695186475774E-08 0.0268964326103516 0.0181355278760702" rpy="0 0 0"/>
+      <mass value="0.0364595688742742"/>
+      <inertia ixx="0.000144229905618148" ixy="-1.85945645058535E-11" ixz="4.76466303943961E-11"
+        iyy="8.1989487730747E-06" iyz="8.90318349993711E-07" izz="0.000147070549779156"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/BR_foot.STL"/>
+      </geometry>
+      <material name="color1"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/BR_foot.STL"/>
+      </geometry>
+    </collision>
+    <contact>
+      <lateral_friction value="1.0"/>
+      <restitution value="0.5"/>
+    </contact>
+  </link>
+
+  <joint name="br_foot_toe" type="revolute">
+    <origin xyz="0 0.115000000000091 0" rpy="3.14159265358979 0 0"/>
+    <parent link="br_foot"/>
+    <child link="br_toe"/>
+    <axis xyz="0 0 1"/>
+    <limit effort="2.7" lower="-3.5" upper="1.0" velocity="1.0"/>
+    <dynamics damping="0.0" friction="0.0"/>
+  </joint>
+
+  <link name="br_toe">
+    <inertial>
+      <origin xyz="0.0138123620121066 -0.0138123620120701 0.0126407688122033" rpy="0 0 0"/>
+      <mass value="0.0120009876791377"/>
+      <inertia ixx="4.37842860521299E-06" ixy="2.06038737805982E-06" ixz="-5.95468752400186E-08"
+        iyy="4.37842860521285E-06" iyz="5.95468752400207E-08" izz="7.32023047052954E-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/BR_toe.STL"/>
+      </geometry>
+      <material name="color1"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry>
+        <mesh filename="package://meshes/BR_toe.STL"/>
+      </geometry>
+    </collision>
+    <contact>
+      <lateral_friction value="1.0"/>
+      <restitution value="0.5"/>
+    </contact>
+  </link>
+
+</robot>
